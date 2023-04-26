@@ -84,7 +84,7 @@ def get_model():
     """Get the model and save to cache"""
     logger.info("Loading model...")
     model_path, encoder_path, lb_path = \
-        ("./model/model.joblib", "./model/encoder.joblib", "./model/lb.joblib")
+        ("./deploy/model.joblib", "./deploy/encoder.joblib", "./deploy/lb.joblib")
     # load model, encoder and label encoder
     model = joblib.load(model_path)
     encoder = joblib.load(encoder_path)
