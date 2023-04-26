@@ -73,6 +73,7 @@ def test_predict_2(test_client):
     assert response.status_code == 200
     assert response.json()['class_name'] == "<=50K"
 
+
 def test_predict_3(test_client):
     # Simulate a valid user input (note: these values may need to be adjusted
     # based on the actual model)
