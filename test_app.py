@@ -29,7 +29,7 @@ class MockUser(BaseModel):
 def test_get(test_client):
     r = test_client.get("/")
     assert r.status_code == 200
-    assert r.json() == {"message": "MLOps - heroku fastapi!"}
+    assert r.json() == {"message": "MLOps - Render API!"}
 
 
 def test_get_failed(test_client):
