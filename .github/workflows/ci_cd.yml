@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  Test:
+  TestAndDeploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -23,6 +23,8 @@ jobs:
         run: dvc pull
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      - name: Sync model to deploy directory
+        run: rsync -av model/* deploy --include="*.joblib" --exclude="*.dvc" --exclude="*.txt"
       - name: Run Flake8
         run: flake8
       - name: Run pytest
