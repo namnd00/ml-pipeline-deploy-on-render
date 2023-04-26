@@ -6,16 +6,16 @@ import requests
 
 data = {
     "age": 32,
+    "hours_per_week": 60,
     "workclass": "Private",
     "education": "Some-college",
-    "maritalStatus": "Married-civ-spouse",
+    "marital_status": "Married-civ-spouse",
     "occupation": "Exec-managerial",
     "relationship": "Husband",
     "race": "Black",
     "sex": "Male",
-    "hoursPerWeek": 60,
-    "nativeCountry": "United-States"
-    }
+    "native_country": "United-States"
+}
 r = requests.post('https://mlops-app.onrender.com/', json=data)
 
 assert r.status_code == 200
