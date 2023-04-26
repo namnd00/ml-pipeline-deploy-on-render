@@ -28,7 +28,9 @@ def test_run(args, val_data, cat_features):
     assert os.path.isfile(args.output_slice)
     with open(args.output_slice, 'r') as file:
         slice_lines = file.readlines()
-    assert len(slice_lines) >= 81 # number of unique combinations of categorical features and their classes in prepared_census.csv.
+    assert len(slice_lines) >= 81
+    # number of unique combinations of categorical features
+    # and their classes in prepared_census.csv.
 
     # Load the trained model and ensure it has expected score on overall test data.
     model = joblib.load(args.model_path)
@@ -36,10 +38,10 @@ def test_run(args, val_data, cat_features):
     lb = joblib.load(args.lb_path)
 
     X_test, y_test, _, _ = process_data(
-                    val_data,
-                    categorical_features=cat_features,
-                    label="salary", encoder=encoder, lb=lb, training=False
-                )
+        val_data,
+        categorical_features=cat_features,
+        label="salary", encoder=encoder, lb=lb, training=False
+    )
     y_preds = model.predict(X_test)
     precision_score, recall_score, f1_score = compute_model_metrics(y_test, y_preds)
     assert precision_score > 0.7 and recall_score > 0.7 and f1_score > 0.7

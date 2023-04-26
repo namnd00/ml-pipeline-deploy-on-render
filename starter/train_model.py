@@ -15,12 +15,12 @@ logger = logging.getLogger()
 
 
 def run(
-        args=None, 
-        data_file="./data/prepared_census.csv", 
-        output_model="./model/model.joblib", 
-        output_encoder="./model/encoder.joblib", 
-        output_lb="./model/lb.joblib"
-    ):
+    args=None,
+    data_file="./data/prepared_census.csv",
+    output_model="./model/model.joblib",
+    output_encoder="./model/encoder.joblib",
+    output_lb="./model/lb.joblib"
+):
     """Execute the model training"""
     # Optional enhancement, use K-fold cross validation instead of a train-test split.
     if args is not None:
@@ -29,7 +29,6 @@ def run(
     else:
         _data_file, _output_model, _output_encoder, _output_lb = \
             (data_file, output_model, output_encoder, output_lb)
-
 
     data = pd.read_csv(_data_file)
     train, _ = train_test_split(data, test_size=0.20)
@@ -55,9 +54,9 @@ def run(
     joblib.dump(encoder, _output_encoder)
     joblib.dump(lb, _output_lb)
 
-    logger.info("Save trained model %s to %s" %(trained_model.__str__, _output_model))
-    logger.info("Save encoder %s to %s" %(encoder.__str__, _output_encoder))
-    logger.info("Save label encoder %s to %s" %(lb.__str__, _output_lb))
+    logger.info("Save trained model %s to %s" % (trained_model.__str__, _output_model))
+    logger.info("Save encoder %s to %s" % (encoder.__str__, _output_encoder))
+    logger.info("Save label encoder %s to %s" % (lb.__str__, _output_lb))
 
 
 if __name__ == "__main__":

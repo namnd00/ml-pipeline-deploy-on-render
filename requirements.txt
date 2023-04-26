@@ -8,3 +8,4 @@ uvicorn
 gunicorn
 cachetools==5.3.0
 dvc
+flake8

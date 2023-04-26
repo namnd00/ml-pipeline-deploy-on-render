@@ -11,10 +11,10 @@ logger = logging.getLogger()
 
 
 def run(
-        args=None, 
-        input_artifact="./data/census.csv", 
-        output_artifact="./data/prepared_census.csv"
-    ):
+    args=None,
+    input_artifact="./data/census.csv",
+    output_artifact="./data/prepared_census.csv"
+):
     """Execute the function"""
     if args is not None:
         _input_artifact = args.input_artifact
@@ -44,6 +44,7 @@ def run(
     df.to_csv(_output_artifact, index=False)
 
     return df
+
 
 if __name__ == "__main__":
     # Create an argument parser with description

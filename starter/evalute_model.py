@@ -3,7 +3,6 @@ Model Evaluation
 """
 import argparse
 import logging
-import numpy as np
 import pandas as pd
 import joblib
 from starter.ml.data import get_categorical_features, process_data
@@ -16,13 +15,13 @@ logger = logging.getLogger()
 
 
 def run(
-        args=None, 
-        data_path="./data/prepared_census.csv", 
-        model_path="./model/model.joblib", 
-        encoder_path="./model/encoder.joblib", 
-        lb_path="./model/lb.joblib", 
-        output_slice="./model/slice_output.txt"
-    ):
+    args=None,
+    data_path="./data/prepared_census.csv",
+    model_path="./model/model.joblib",
+    encoder_path="./model/encoder.joblib",
+    lb_path="./model/lb.joblib",
+    output_slice="./model/slice_output.txt"
+):
     """The model evaluation function"""
 
     if args is not None:
@@ -76,13 +75,14 @@ def run(
     _y_preds = model.predict(_X_test)
     _precision_score, _recall_score, _f1_score = compute_model_metrics(_y_test, _y_preds)
     line = "[Overall Score] - Precision: %s " \
-                "Recall: %s F1: %s" % (_precision_score, _recall_score, _f1_score)
+        "Recall: %s F1: %s" % (_precision_score, _recall_score, _f1_score)
     logging.info(line)
     slice_values.append(line)
 
     with open(_output_slice, 'w') as file:
         for slice_value in slice_values:
             file.write(slice_value + '\n')
+
 
 if __name__ == "__main__":
     # Create an argument parser with description

@@ -1,7 +1,6 @@
 """
 This script for Rest API
 """
-import os
 import logging
 from fastapi import FastAPI, HTTPException, status
 from cachetools import cached, TTLCache
@@ -77,7 +76,7 @@ class PredictionResponse(BaseModel):
 
 
 # define ttl cache, maxsize is the maximum number of models and ttl is the time-to-live in seconds
-cache = TTLCache(maxsize=100, ttl=300) 
+cache = TTLCache(maxsize=100, ttl=300)
 
 
 @cached(cache)
@@ -132,9 +131,9 @@ async def predict(user_data: User):
 
     # process input user data
     X, _, _, _ = process_data(
-                temp_df,
-                categorical_features=get_categorical_features(),
-                encoder=encoder, lb=lb, training=False)
+        temp_df,
+        categorical_features=get_categorical_features(),
+        encoder=encoder, lb=lb, training=False)
     # get the prediction
     pred = inference(model, X)
     y = lb.inverse_transform(pred)[0]

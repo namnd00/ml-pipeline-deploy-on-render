@@ -34,7 +34,7 @@ def train_model(X_train, y_train):
     scores = cross_val_score(model, X_train, y_train, scoring='accuracy',
                              cv=cv, n_jobs=-1)
     logger.info('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
-    
+
     return model
 
 
@@ -57,9 +57,9 @@ def compute_model_metrics(y, preds):
     fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
-    logger.info("Precision score: %s\nRecall score: %s\nFbeta score: %s" % \
+    logger.info("Precision score: %s\nRecall score: %s\nFbeta score: %s" %
                 (precision, recall, fbeta))
-                
+
     return precision, recall, fbeta
 
 

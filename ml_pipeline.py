@@ -27,7 +27,7 @@ def execute(args):
         logging.info("Train model started")
         train_model.run()
 
-    if "evaluate_model"in active_steps:
+    if "evaluate_model" in active_steps:
         logging.info("Evaluate model started")
         evalute_model.run()
 

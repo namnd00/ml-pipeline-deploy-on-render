@@ -26,6 +26,7 @@ class MockUser(BaseModel):
     sex: str
     native_country: str
 
+
 def test_get(test_client):
     r = test_client.get("/")
     assert r.status_code == 200
@@ -38,7 +39,8 @@ def test_get_failed(test_client):
 
 
 def test_predict(test_client):
-    # Simulate a valid user input (note: these values may need to be adjusted based on the actual model)
+    # Simulate a valid user input (note: these values may need to be adjusted
+    # based on the actual model)
     user_input = MockUser(
         age=40,
         hours_per_week=40,
@@ -62,7 +64,7 @@ def test_predict(test_client):
 
 
 def test_predict_failed(test_client):
-    user_input =  MockUser(
+    user_input = MockUser(
         age=40,
         hours_per_week=40,
         workclass='Private',
