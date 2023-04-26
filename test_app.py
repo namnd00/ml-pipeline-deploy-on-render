@@ -37,7 +37,43 @@ def test_get_failed(test_client):
     assert r.status_code != 200
 
 
-def test_predict(test_client):
+def test_predict_1(test_client):
+    user_input = MockUser(
+        age=32,
+        hours_per_week=60,
+        workclass='Private',
+        education='Some-college',
+        marital_status='Married-civ-spouse',
+        occupation='Exec-managerial',
+        relationship='Husband',
+        race='White',
+        sex='Male',
+        native_country='United-States'
+    )
+    response = test_client.post("/", json=user_input.dict())
+    assert response.status_code == 200
+    assert response.json()['class_name'] == ">50K"
+
+
+def test_predict_2(test_client):
+
+    user_input = MockUser(
+        age=19,
+        hours_per_week=40,
+        workclass='Private',
+        education='HS-grad',
+        marital_status='Never-married',
+        occupation='Other-service',
+        relationship='Own-child',
+        race='Black',
+        sex='Male',
+        native_country='United-States'
+    )
+    response = test_client.post("/", json=user_input.dict())
+    assert response.status_code == 200
+    assert response.json()['class_name'] == "<=50K"
+
+def test_predict_3(test_client):
     # Simulate a valid user input (note: these values may need to be adjusted
     # based on the actual model)
     user_input = MockUser(

@@ -18,6 +18,9 @@ Using `20 %` of this data: `https: // archive.ics.uci.edu/ml/datasets/census+inc
 
 # Metrics
 - Accuracy score: ~ `0.81`.
+- Precision: `0.90`
+- Recall: `0.87`
+- F1: `0.88`
 
 # Ethical Considerations
 The dataset includes information about race, gender, and country of origin, which could potentially result in discriminatory predictions. As such, it is crucial to conduct a thorough investigation before using the model to ensure that it does not unfairly discriminate against any particular group.
