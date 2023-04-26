@@ -95,7 +95,7 @@ def get_model():
 
 @app.get("/")
 async def get_items():
-    return {"message": "MLOps - heroku fastapi!"}
+    return {"message": "MLOps - Render API!"}
 
 
 @app.post("/")
