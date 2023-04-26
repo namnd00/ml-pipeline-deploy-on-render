@@ -1,4 +1,5 @@
 [core]
-    remote = local_remote
-['remote "local_remote"']
-    url = ../local_remote
+    remote = remote_gdrive
+['remote "remote_gdrive"']
+    url = gdrive://10qoGdMiSpGjdjpDiErdbLAtAddOaTp2z
+    gdrive_acknowledge_abuse = true

@@ -9,3 +9,5 @@ gunicorn
 cachetools==5.3.0
 dvc
 flake8
+google-api-python-client>=2.0.2
+dvc-gdrive
