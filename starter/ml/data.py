@@ -1,5 +1,29 @@
+"""
+The processing data module
+"""
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import logging
+
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
+logger = logging.getLogger()
+
+
+def get_categorical_features():
+    """ Return feature categories
+    """
+    categorical_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
+    return categorical_features
 
 
 def process_data(
@@ -43,7 +67,8 @@ def process_data(
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
     """
-
+    if len(categorical_features) <= 0:
+        categorical_features = get_categorical_features()
     if label is not None:
         y = X[label]
         X = X.drop([label], axis=1)
@@ -54,7 +79,7 @@ def process_data(
     X_continuous = X.drop(*[categorical_features], axis=1)
 
     if training is True:
-        encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
+        encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
         lb = LabelBinarizer()
         X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
@@ -63,8 +88,8 @@ def process_data(
         try:
             y = lb.transform(y.values).ravel()
         # Catch the case where y is None because we're doing inference.
-        except AttributeError:
-            pass
+        except AttributeError as e:
+            logger.error(e)
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
