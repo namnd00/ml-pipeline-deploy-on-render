@@ -5,6 +5,8 @@ Rest API module test
 import pytest
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
+import sys
+sys.path.append("../")
 from main import app
 
 
