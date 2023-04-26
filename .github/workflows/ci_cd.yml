@@ -1,4 +1,4 @@
-name: Test pipeline
+name: CI/CD pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -31,10 +31,16 @@ jobs:
   # Heavily modified deploy job to fit render.com
   deploy:
     name: Deploy
-    needs: [test] # Our tests must pass in order to run the deploy job
+    needs: [Test] # Our tests must pass in order to run the deploy job
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+      - name: Pull model from Google Drive
+        run: dvc pull model -R && ls -l model
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
